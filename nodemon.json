@@ -1,0 +1,5 @@
+{
+  "verbose": true,
+  "ignore": ["*.test.{t|j}s", "node_modules/*"],
+  "delay": 2500
+}

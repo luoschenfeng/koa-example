@@ -6,7 +6,7 @@
     "runtimeArgs": [
       "dev",
     ],
-    "runtimeExecutable": "/home/luoschenfeng/.nvm/versions/node/v16.14.0/bin/yarn",
+    "runtimeExecutable": "/home/luoschenfeng/.nvm/versions/node/v16.14.2/bin/yarn",
     "skipFiles": [
       "<node_internals>/**"
     ],

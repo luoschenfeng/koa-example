@@ -1,89 +1,71 @@
-import { URL } from 'url'
-import * as Koa from "koa"
+import { method,  route, childFactory, controller } from './Router.interface'
+
 /***
  * init a Router
  */
 export default class Router {
 
   pattern: string
-  method?: method
+  method: method
   childFactory?: childFactory
-  path = ''
+  controller?: controller
   meta = {}
-  params = {}
 
   /**
    * @constructor
    * @param {String} pattern router match pattern
    * @param {method} method router method
+   * @param {controller} controller router controller
    * @param {childFactory} childFactory router childs
    */
-  constructor({pattern, method, childFactory, meta}: route) {
+  constructor({pattern, method, controller, childFactory, meta}: route) {
     this.pattern = pattern
-    this.method = method ? method : ['ACL', 'BIND', 'CHECKOUT', 'CONNECT', 'COPY', 'DELETE',
-      'GET', 'HEAD', 'LINK', 'LOCK', 'M-SEARCH', 'MERGE',
-      'MKACTIVITY', 'MKCALENDAR', 'MKCOL', 'MOVE', 'NOTIFY', 'OPTIONS',
-      'PATCH', 'POST', 'PROPFIND', 'PROPPATCH', 'PURGE', 'PUT',
-      'REBIND', 'REPORT', 'SEARCH', 'SOURCE', 'SUBSCRIBE', 'TRACE',
-      'UNBIND', 'UNLINK', 'UNLOCK', 'UNSUBSCRIBE'
-    ]
+    this.method = method || 'ALL'
+    this.controller = controller
     this.childFactory = childFactory
     this.meta = meta
   }
 
   /**
-   * create a get router
+   * create a POST router
    */
-  static get({pattern, controller, childFactory}: route) {
-    return new Router({pattern, method: 'GET', controller, childFactory})
+  static get(pattern: string, factory: controller | childFactory) {
+    if (factory.name === 'defineAsyncRoutes') {
+      return new Router({pattern, method: 'GET', childFactory: factory as childFactory})
+    } else {
+      return new Router({pattern, method: 'GET', controller: factory as controller})
+    }
   }
 
   /**
-   * create a get router
+   * create a post router
    */
-  static post({pattern, controller, childFactory}: route) {
-    return new Router({pattern, method: 'POST', controller, childFactory})
+   static post(pattern: string, factory: controller | childFactory) {
+    if (factory.name === 'defineAsyncRoutes') {
+      return new Router({pattern, method: 'POST', childFactory: factory as childFactory})
+    } else {
+      return new Router({pattern, method: 'POST', controller: factory as controller})
+    }
   }
 
   /**
    * create a router instance
    */
-  static instance({pattern, method, controller, childFactory}: route) {
-    return new Router({pattern, method, controller, childFactory})
+  static instance(pattern, method, factory: controller | childFactory) {
+    if (factory.name === 'defineAsyncRoutes') {
+      return new Router({pattern, method, childFactory: factory as childFactory})
+    } else {
+      return new Router({pattern, method, controller: factory as controller})
+    }
   }
 }
 
-
-
-export type method =  typeof methods[number] | Array<typeof methods[number]>
-
-export interface route {
-  pattern: string
-  method?: method
-  childFactory?: childFactory,
-  controller?: (ctx: Koa.Context) => void,
-  path?: string
-  meta?: likeObject | likeObject[]
-  params?: likeObject | likeObject[]
+export function defineAsyncRoutes (path): () => Promise<route[]> {
+  async function defineAsyncRoutes (): Promise<route[]> {
+    const routesDefault: { default:  route[]} =  await import(path)
+    return routesDefault.default
+  }
+  return defineAsyncRoutes
 }
 
-export interface childFactory {
-  (): Promise<route[]>
-}
-
-
-const methods = ['ACL', 'BIND', 'CHECKOUT', 'CONNECT', 'COPY', 'DELETE',
-  'GET', 'HEAD', 'LINK', 'LOCK', 'M-SEARCH', 'MERGE',
-  'MKACTIVITY', 'MKCALENDAR', 'MKCOL', 'MOVE', 'NOTIFY', 'OPTIONS',
-  'PATCH', 'POST', 'PROPFIND', 'PROPPATCH', 'PURGE', 'PUT',
-  'REBIND', 'REPORT', 'SEARCH', 'SOURCE', 'SUBSCRIBE', 'TRACE',
-  'UNBIND', 'UNLINK', 'UNLOCK', 'UNSUBSCRIBE'
-] as const
-type Concrete<Type> = {
-  [Property in keyof Type]: Type[Property]
-} & route
-
-type likeObject = {
-  [key: string]: any
-}
 

@@ -1,6 +1,7 @@
 import type = require('@/types')
 export type meta = {
-  tableName: string
+  tableName?: string
+  orderByMode?: 'ASC' | 'DESC'
 }
 
 export interface selectOption {
@@ -10,10 +11,10 @@ export interface selectOption {
     offset?: number
   }
   groupBy?: string[]
-  order?: order[]
+  orderBy?: orderBy[]
 }
 
-type order = {
+type orderBy = {
   mode?: 'ASC' | 'DESC',
   colName: string
 }

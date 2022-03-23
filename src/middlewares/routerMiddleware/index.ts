@@ -67,7 +67,7 @@ export default function routerMiddleware(option: {
     if (matched) {
       if (!callback) throw Error('route 没有相应的 controller')
   
-      ctx.body = callback(ctx, { ...matchedInfo, ...urlObj})
+      ctx.body = await Promise.resolve(callback(ctx, { ...matchedInfo, ...urlObj}))
     } else if (!ctx.body) {
       ctx.body = respnseError(404000, '资源不存在')
     }

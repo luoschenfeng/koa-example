@@ -1,14 +1,12 @@
-import Model from '../common/Model'
+import Model from '../core/Model'
 
 export class User extends Model {
-  meta = {
-    tableName: 'user'
-  }
-
-  name: string
-  age: number
-  address: string
-  constructor () {
-    super()
-  }
+  id: number
+  sex: string
+  sex_desc: string
+  username: string
+  password: string
+  mail: string
+  create_time: string
+  update_time: string
 }

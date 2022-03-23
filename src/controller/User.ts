@@ -1,18 +1,9 @@
 import type { controller } from '@/middlewares/routerMiddleware/Router.interface'
-export const  userList: controller = (ctx) => {
-  return {
-    status: 200000,
-    data: {
-      total: 2,
-      page: 1,
-      totalPage: 1,
-      count: 10,
-      list: [
-        {name: 'yaohan', age: 18},
-        {name: 'maoten', age: 23},
-      ]
-    }
-  }
+import { User } from '@/model/User'
+export const  userList: controller = async  (ctx) => {
+  const user = new User()
+  const userList = user.where('sex', 1).orderBy('username').limit(10).select()
+  return userList
 }
 
 export const user: controller = (ctx, matchInfo) => {

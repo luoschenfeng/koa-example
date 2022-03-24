@@ -1,6 +1,8 @@
 import  Route from '@/middlewares/routerMiddleware/Router'
 import  route from '@/middlewares/routerMiddleware/Router'
-import { userList, user, addUser, updateUser } from '@/controller/User'
+import {
+  userList, user, addUser, updateUser, 
+} from '@/controller/User'
 const routes: route[] = [
   Route.get('', userList),
   Route.get('add', addUser),

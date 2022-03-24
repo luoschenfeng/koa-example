@@ -1,4 +1,3 @@
-import type = require('@/types')
 export type meta = {
   tableName?: string
   orderByMode?: 'ASC' | 'DESC'

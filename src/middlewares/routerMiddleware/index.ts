@@ -1,8 +1,16 @@
-import * as Koa from "koa"
-import { defineAsyncRoutes } from './Router'
-import { URL } from 'url'
-import { responseJsonError } from '@/core/response'
-import type { route, routerMatchedInfo, controller, methodUnion } from './Router.interface'
+import * as Koa from 'koa'
+import {
+  defineAsyncRoutes, 
+} from './Router'
+import {
+  URL, 
+} from 'url'
+import {
+  responseJsonError, 
+} from '@/core/response'
+import type {
+  route, routerMatchedInfo, controller, methodUnion, 
+} from './Router.interface'
 
 /***
  * koa router middleware
@@ -12,9 +20,10 @@ import type { route, routerMatchedInfo, controller, methodUnion } from './Router
  */
 export default function routerMiddleware(option: {
   root: string
-} = { root: '@/routes'}) {
+} = {
+  root: '@/routes',
+}) {
   return async function (ctx: Koa.Context, next: Koa.Next): Promise<void> {
-    const cwd = process.cwd()
 
     const urlObj = new URL(ctx.request.href)
 
@@ -24,27 +33,33 @@ export default function routerMiddleware(option: {
     const routes: route[] = await (defineAsyncRoutes(option.root)())
 
     const pathStr = urlObj.pathname.slice(1)
+
     const paths = pathStr.split('/')
 
     let callback: controller
-    let matchedInfo: routerMatchedInfo = {
+
+    const matchedInfo: routerMatchedInfo = {
       params: {},
-      method: 'ALL'
+      method: 'ALL',
     }
 
     let index = 0
 
-    function match (pattern, subPath): boolean {
+    function match(pattern, subPath): boolean {
       if (pattern[0] === ':') {
         if (subPath) {
           matchedInfo.params[pattern.slice(1)] = subPath
 
           return true
         } else {
-          ctx.body = responseJsonError({ status: 404000, message: `参数${pattern.slice(1)}获取为空`})
+          ctx.body = responseJsonError({
+            status: 404000,
+            message: `参数${pattern.slice(1)}获取为空`,
+          })
         }
       } else {
         let reg = '^$'
+
         if (pattern[0] === '/') {
           reg = pattern.slice(1, -1)
         } else if (pattern !== '') {
@@ -60,10 +75,12 @@ export default function routerMiddleware(option: {
     async function select(routes: route[]) {
       const subPath =  paths[index] || ''
 
-      for (let route of routes) {
+      for (const route of routes) {
 
         if (!route.method.includes(method)) {
-          ctx.body = responseJsonError({status: 40500})
+          ctx.body = responseJsonError({
+            status: 40500,
+          })
           continue
         }
 
@@ -85,14 +102,20 @@ export default function routerMiddleware(option: {
       }
     }
 
-    let matched = await select(routes)
+    const matched = await select(routes)
 
     if (matched) {
-      if (!callback) throw Error('route 没有相应的 controller')
+      if (!callback) { throw Error('route 没有相应的 controller') }
 
-      ctx.body = await Promise.resolve(callback(ctx, { ...matchedInfo, ...urlObj}))
+      ctx.body = await Promise.resolve(callback(ctx, {
+        ...matchedInfo,
+        ...urlObj,
+      }))
     } else if (!ctx.body) {
-      ctx.body = responseJsonError({ status: 404000, message: '资源不存在'})
+      ctx.body = responseJsonError({
+        status: 404000,
+        message: '资源不存在',
+      })
     }
 
     await next()

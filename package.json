@@ -20,7 +20,8 @@
     "ts-node": "^10.7.0"
   },
   "scripts": {
-    "dev": "nodemon --exec ts-node src/main.ts"
+    "dev": "nodemon --exec ts-node src/main.ts",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "engines": {
     "node": ">=16.14.0"

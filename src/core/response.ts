@@ -1,5 +1,3 @@
-import type = require('@/types')
-
 export function responseJsonList<Model>(listInfo: {
   total: number
   page: number
@@ -10,10 +8,10 @@ export function responseJsonList<Model>(listInfo: {
       total: listInfo.total,
       page: listInfo.page,
       data: {
-        list: listInfo.list
-      }
+        list: listInfo.list,
+      },
     },
-    status: 0
+    status: 0,
   }
 }
 
@@ -22,9 +20,9 @@ export function responseJsonDetail<Model>(detailInfo: {
 }): responseDetali<Model> {
   return  {
     data: {
-      data: detailInfo.data
+      data: detailInfo.data,
     },
-    status: 0
+    status: 0,
   }
 }
 
@@ -38,7 +36,7 @@ export function responseJsonError(errorInfo: {
     data: {
       message: errorInfo.message || errorCodes[errorInfo.status],
       title: errorInfo.title,
-    }
+    },
   }
 }
 
@@ -70,5 +68,5 @@ export interface responseError {
 }
 
 const errorCodes = {
-  405000: '方法未实现'
+  405000: '方法未实现',
 }

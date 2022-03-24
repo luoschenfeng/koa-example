@@ -1,0 +1,163 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": [ "@typescript-eslint" ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "rules": {
+    "@typescript-eslint/no-explicit-any": "off",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error"
+    ],
+    // 单引号(js中使用单引号)
+    "quotes": [
+      "error",
+      "single",
+      {
+        "allowTemplateLiterals": true
+      }
+    ],
+    // 换行(两个空格)
+    "indent": [
+      "error",
+      2,
+      {
+        "ignoredNodes": [
+          "TemplateLiteral"
+        ]
+      }
+    ],
+    // 添加大括号(if语句等代码块添加大括号)
+    "curly": "error",
+    // 函数括号前加空格(具名类型的函数不加空格)
+    "space-before-function-paren": [
+      "error",
+      {
+        "anonymous": "always",
+        "named": "never",
+        "asyncArrow": "always"
+      }
+    ],
+    //  对象的.符号位置(操作和点在同一行)
+    "dot-location": [
+      "error",
+      "property"
+    ],
+    // 对象花括号后的换行(multiline表示属性内有换行，则花括号独占一行，)
+    "object-curly-newline": [
+      "error",
+      {
+        "multiline": true,
+        "minProperties": 1
+      }
+    ],
+    // 对象多个属性在不同行，
+    "object-property-newline": [
+      "error",
+      {
+        "allowAllPropertiesOnSameLine": false
+      }
+    ],
+    // object，array多行时最后一个属性加逗号，有利于git的diff
+    "comma-dangle": [
+      "error",
+      "always-multiline"
+    ],
+    // 禁止或强制在代码块中开括号前和闭括号后有空格
+    "block-spacing": [
+      "error",
+      "always"
+    ],
+    // 关键字空格
+    "keyword-spacing": [
+      "error",
+      {
+        "before": true,
+        "after": true
+      }
+    ],
+    // "brace-style": ["error", "1tbs"], // 强制在代码块中使用一致的大括号风格 if...else
+    // 逗号前后的空格,
+    "comma-spacing": [
+      "error",
+      {
+        "before": false,
+        "after": true
+      }
+    ],
+    // :前后的空格,
+    "key-spacing": [
+      "error",
+      {
+        "beforeColon": false
+      }
+    ],
+    // 三元操作符换行
+    "multiline-ternary": [
+      "error",
+      "always-multiline"
+    ],
+    // 申明语句换行
+    "padding-line-between-statements": [
+      "error",
+      {
+        "blankLine": "always",
+        "prev": [
+          "const",
+          "let",
+          "var"
+        ],
+        "next": "*"
+      }
+    ],
+    // function {} 前面的空格
+    "space-before-blocks": [
+      "error",
+      "always"
+    ],
+    // 圆括号内无空格
+    "space-in-parens": [
+      "error",
+      "never"
+    ],
+    // 数组前后空格
+    "array-bracket-spacing": [
+      "error",
+      "always"
+    ],
+    // 数组中括号后的换行
+    "array-bracket-newline": [
+      "error",
+      {
+        "multiline": true
+      }
+    ],
+    // 数组元素换行
+    "array-element-newline": [
+      "error",
+      {
+        "multiline": true,
+        "minItems": 2
+      }
+    ],
+    // 对象加空格
+    "object-curly-spacing": [
+      "error",
+      "always"
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/__tests__/*.{j,t}s?(x)",
+        "**/tests/unit/**/*.spec.{j,t}s?(x)"
+      ],
+      "env": {
+        "jest": true
+      }
+    }
+  ]
+}

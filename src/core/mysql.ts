@@ -1,10 +1,14 @@
-import { createPool, Connection } from 'mysql'
+import {
+  createPool, Connection, 
+} from 'mysql'
 import setting from '@/setting'
 
-import { promisify } from 'util'
+import {
+  promisify, 
+} from 'util'
 
 
-var pool  = createPool({
+const pool  = createPool({
   host: setting.mysql.host,
   user: setting.mysql.user,
   password: setting.mysql.password,
@@ -18,7 +22,7 @@ pool.on('release', function (connection: Connection) {
 });
 
 const mysql = {
-  exec: promisify(pool.query.bind(pool))
+  exec: promisify(pool.query.bind(pool)),
 }
 
 export default mysql

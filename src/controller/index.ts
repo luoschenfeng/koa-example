@@ -1,6 +1,5 @@
-import * as Koa from 'koa'
-export function home(ctx: Koa.Context) {
+export function home() {
   return {
-    data: 11
+    data: 11,
   }
 }

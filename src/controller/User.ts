@@ -1,6 +1,12 @@
-import type { controller } from '@/middlewares/routerMiddleware/Router.interface'
-import { responseJsonList, responseJsonError, responseDetali, responseJsonDetail } from '@/core/response'
-import { User } from '@/model/User'
+import type {
+  controller, 
+} from '@/middlewares/routerMiddleware/Router.interface'
+import {
+  responseJsonList, responseJsonError, responseJsonDetail, 
+} from '@/core/response'
+import {
+  User, 
+} from '@/model/User'
 
 /**
  * 用户列表
@@ -8,21 +14,31 @@ import { User } from '@/model/User'
  */
 export const  userList: controller = async () => {
   const user = new User()
-  const userList = await user.fields(['username', 'MAX(id)']).where('sex', 1).groupBy('username').orderBy('username').limit(10).find()
-  return responseJsonList({total: 2, page: 1, list: userList})
+
+  const userList = await user.fields([
+    'username',
+    'MAX(id)', 
+  ]).where('sex', 1).groupBy('username').orderBy('username').limit(10).find()
+
+  return responseJsonList({
+    total: 2,
+    page: 1,
+    list: userList,
+  })
 }
 
 export const user: controller = (ctx, matchInfo) => {
   return {
     status: 200000,
     data: {
-      id: matchInfo.params?.id
-    }
+      id: matchInfo.params?.id,
+    },
   }
 }
 
 export const addUser: controller = async () => {
   const user = new User()
+
   try {
     await user.insert({
       id: 65539,
@@ -35,16 +51,17 @@ export const addUser: controller = async () => {
   } catch (err) {
     return responseJsonError({
       status: 500000,
-      message: err.message
+      message: err.message,
     })
   }
   return responseJsonDetail({
-    data: ''
+    data: '',
   })
 }
 
 export const updateUser: controller = async () => {
   const user = new User()
+
   try {
     await user.where('id', 65539).update({
       sex: 1,
@@ -53,10 +70,10 @@ export const updateUser: controller = async () => {
   } catch (err) {
     return responseJsonError({
       status: 500000,
-      message: err.message
+      message: err.message,
     })
   }
   return responseJsonDetail({
-    data: ''
+    data: '',
   })
 }

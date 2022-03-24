@@ -24,7 +24,7 @@ export interface route {
 }
 export type routerMatchedInfo = matchInfo<URL>
 export interface controller {
-  (ctx: Koa.Context, matchedInfo: routerMatchedInfo): object
+  (ctx: Koa.Context, matchedInfo: routerMatchedInfo): any
 }
 
 interface routerMatched {

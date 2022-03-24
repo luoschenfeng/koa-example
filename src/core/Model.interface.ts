@@ -5,6 +5,7 @@ export type meta = {
 }
 
 export interface selectOption {
+  fields?: string[],
   where?: where[]
   limit?: {
     rowCount: number,
@@ -21,5 +22,5 @@ type orderBy = {
 type where = {
   colName: string,
   operate?: string,
-  condition: string 
+  condition: string
 }

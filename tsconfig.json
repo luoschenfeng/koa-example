@@ -6,5 +6,5 @@
       "@/*": ["src/*"]
     },
   },
-  "include": ["src/**/*", "index.d.ts"]
+  "include": [ "index.d.ts", "src/**/*"]
 }

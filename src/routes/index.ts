@@ -1,19 +1,19 @@
-import  Router, {
-  defineAsyncRoutes, 
-} from '@/middlewares/routerMiddleware/Router'
-import  {
-  route, 
-} from '@/middlewares/routerMiddleware/Router.interface'
+import Router, {
+  route,
+} from '@/core/Router'
 import {
-  home, 
+  home,
 } from '@/controller/index'
-import {
-  resolve, 
-} from 'path'
+import user from './user'
+import menu from './menu'
 
 const routes: route[] = [
   Router.get('/^$/', home),
-  Router.get('user', defineAsyncRoutes(resolve(__dirname, './user'))),
+  Router.get('api/user', user),
+  new Router({
+    pattern: 'api/routes',
+    children: menu,
+  }),
 ]
 
 export default routes

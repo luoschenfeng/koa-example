@@ -1,11 +1,11 @@
 import type {
-  controller, 
-} from '@/middlewares/routerMiddleware/Router.interface'
+  controller,
+} from '@/core/Router'
 import {
-  responseJsonList, responseJsonError, responseJsonDetail, 
+  responseJsonList, responseJsonError, responseJsonDetail,
 } from '@/core/response'
 import {
-  User, 
+  User,
 } from '@/model/User'
 
 /**
@@ -17,7 +17,7 @@ export const  userList: controller = async () => {
 
   const userList = await user.fields([
     'username',
-    'MAX(id)', 
+    'MAX(id)',
   ]).where('sex', 1).groupBy('username').orderBy('username').limit(10).find()
 
   return responseJsonList({
@@ -27,11 +27,10 @@ export const  userList: controller = async () => {
   })
 }
 
-export const user: controller = (ctx, matchInfo) => {
+export const user: controller = () => {
   return {
-    status: 200000,
     data: {
-      id: matchInfo.params?.id,
+      id: 1,
     },
   }
 }
@@ -41,7 +40,7 @@ export const addUser: controller = async () => {
 
   try {
     await user.insert({
-      id: 65539,
+      id: 65538,
       sex: 2,
       sex_desc: '女',
       username: 'goul',
@@ -50,7 +49,7 @@ export const addUser: controller = async () => {
     })
   } catch (err) {
     return responseJsonError({
-      status: 500000,
+      code: '500000',
       message: err.message,
     })
   }
@@ -63,13 +62,13 @@ export const updateUser: controller = async () => {
   const user = new User()
 
   try {
-    await user.where('id', 65539).update({
+    await user.where('id', 65538).update({
       sex: 1,
       sex_desc: '男',
     })
   } catch (err) {
     return responseJsonError({
-      status: 500000,
+      code: '500000',
       message: err.message,
     })
   }

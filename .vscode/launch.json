@@ -10,7 +10,8 @@
     "skipFiles": [
       "<node_internals>/**"
     ],
-    "type": "pwa-node"
+    "cwd": "${workspaceFolder}",
+    "type": "node"
   }
   ]
 }

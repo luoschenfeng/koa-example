@@ -27,14 +27,15 @@ export function responseJsonDetail<Model>(detailInfo: {
 }
 
 export function responseJsonError(errorInfo: {
-  status: number
+  code: string,
   message?: string
   title?: string
 }): responseError {
   return {
-    status: errorInfo.status,
+    status: 1,
     data: {
-      message: errorInfo.message || errorCodes[errorInfo.status],
+      code: errorInfo.code,
+      message: errorInfo.message || errorCodes[errorInfo.code],
       title: errorInfo.title,
     },
   }
@@ -49,24 +50,25 @@ export interface responseList<Model> {
       list: Model[]
     }
   },
-  status: number
+  status: 0
 }
 
 export interface responseDetali<Model> {
   data: {
     data: Model
   },
-  status: number
+  status: 0
 }
 
 export interface responseError {
   data: {
+    code: string,
     message: string,
     title?: string
   },
-  status: number
+  status: 1
 }
 
 const errorCodes = {
-  405000: '方法未实现',
+  '405000': '方法未实现',
 }

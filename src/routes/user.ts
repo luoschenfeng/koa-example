@@ -1,13 +1,14 @@
-import  Route from '@/middlewares/routerMiddleware/Router'
-import  route from '@/middlewares/routerMiddleware/Router'
+import Router, {
+  route,
+} from '@/core/Router'
 import {
-  userList, user, addUser, updateUser, 
-} from '@/controller/User'
+  userList, user, addUser, updateUser,
+} from '@/controller/user'
 const routes: route[] = [
-  Route.get('', userList),
-  Route.get('add', addUser),
-  Route.get('update', updateUser),
-  Route.get(':id', user),
+  Router.get('', userList),
+  Router.get('add', addUser),
+  Router.get('update', updateUser),
+  Router.get(':id', user),
 ]
 
 export default routes

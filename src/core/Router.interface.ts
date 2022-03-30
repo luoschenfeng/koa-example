@@ -1,6 +1,3 @@
-import {
-  URL, 
-} from 'url'
 import * as Koa from 'koa'
 import type = require('@/types')
 
@@ -15,26 +12,16 @@ export type methodUnion = 'ACL' | 'BIND' | 'CHECKOUT' | 'CONNECT' | 'COPY' | 'DE
 export type method =  methodUnion | 'ALL' | Array<methodUnion | 'ALL'>
 
 
-export type childFactory = () => Promise<route[]>
+export type children = route[]
 
 export interface route {
-  method: method
+  method?: method
   pattern: string
   controller?: controller,
-  childFactory?: childFactory,
+  children?: children,
   meta?: type.likeObject
 }
-export type routerMatchedInfo = matchInfo<URL>
 export interface controller {
-  (ctx: Koa.Context, matchedInfo: routerMatchedInfo): any
+  (ctx: Koa.Context): any
 }
 
-interface routerMatched {
-  method: string
-  matched?: type.likeObject[]
-  params?: type.likeObject
-}
-
-type matchInfo<Type> = {
-  [Property in keyof Type]?: Type[Property]
-} & routerMatched

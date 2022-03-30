@@ -46,7 +46,7 @@ export default async function (ctx:Koa.Context, next:Koa.Next) {
 
       const spliterCount = deleteSpliter(route.pattern).split('/').length
 
-      const subPathList = pathList.slice(start, spliterCount + 1)
+      const subPathList = pathList.slice(start, start + spliterCount)
 
       const subPath = subPathList.join('/')
 
@@ -142,16 +142,16 @@ function match(patterns:string, paths:string): matchedResult  {
           matchedMode, matchedPattern,
         } = regMetched.groups
 
+        if (!matchedResult.result) { matchedResult.result = {} }
         if (matchedMode) {
           if (modeList[matchedMode] && modeList[matchedMode](path)) {
-            if (!matchedResult.result) { matchedResult.result = {} }
             matchedResult.result[matchedPattern] = path
           } else {
             matchedResult.result = `expect params "${matchedPattern}" is a  ${matchedMode} but get a string`
             index--
             break
           }
-        } else if (matchedResult.result[matchedPattern] === path) {
+        } else if (path) {
           matchedResult.result[matchedPattern] = path
         } else {
           index--
@@ -172,5 +172,5 @@ function match(patterns:string, paths:string): matchedResult  {
 }
 
 function deleteSpliter(str: string):string {
-  return /^\/?(.*)\/?$/.exec(str)[1]
+  return str.replace(/^\//, '').replace(/\/$/, '')
 }

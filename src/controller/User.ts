@@ -27,10 +27,10 @@ export const  userList: controller = async () => {
   })
 }
 
-export const user: controller = () => {
+export const user: controller = (ctx) => {
   return {
     data: {
-      id: 1,
+      id: ctx.request.params.id,
     },
   }
 }
@@ -40,7 +40,7 @@ export const addUser: controller = async () => {
 
   try {
     await user.insert({
-      id: 65538,
+      id: 65539,
       sex: 2,
       sex_desc: '女',
       username: 'goul',
@@ -62,7 +62,7 @@ export const updateUser: controller = async () => {
   const user = new User()
 
   try {
-    await user.where('id', 65538).update({
+    await user.where('id', 65539).update({
       sex: 1,
       sex_desc: '男',
     })

@@ -16,6 +16,6 @@ app.use(async (ctx: Koa.Context, next: Koa.Next) => {
 
 app.use(routerMiddleware);
 
-app.listen('8004', function () {
-  console.log('listen localhost:8004')
+app.listen('8080', function () {
+  console.log('listen localhost:8080')
 })

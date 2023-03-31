@@ -2,7 +2,7 @@ import 'module-alias/register'
 
 import setting from '@/setting'
 
-import * as Koa from 'koa'
+import Koa from 'koa'
 
 
 import routerMiddleware from '@/middlewares/routerMiddleware'

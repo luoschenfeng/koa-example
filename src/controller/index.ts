@@ -7,7 +7,7 @@ import {
 import {
   createHash,
 } from 'crypto'
-export const index: controller = (ctx) => {
+export const testServer: controller = (ctx) => {
   const {
     signature, timestamp, nonce, echostr,
   } = ctx.request.query
@@ -30,6 +30,12 @@ export const index: controller = (ctx) => {
     return ''
   }
 }
+
+export const returnMassage: controller = (ctx) => {
+  console.log(ctx.body)
+  return ctx.body
+}
+
 
 
 export function home() {

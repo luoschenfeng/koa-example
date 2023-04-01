@@ -21,7 +21,7 @@
   },
   "scripts": {
     "dev": "nodemon --exec tsx src/main.ts",
-    "dev:debug": "nodemon  --exec tsx --inspect=0.0.0.0:9229 src/main.ts",
+    "dev:debug": "nodemon  --exec tsx --inspect=139.28.235.182:9229 src/main.ts",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "engines": {

@@ -16,10 +16,11 @@
     "@typescript-eslint/eslint-plugin": "^5.14.0",
     "@typescript-eslint/parser": "^5.14.0",
     "eslint": "^8.11.0",
+    "nodemon": "^2.0.22",
     "tsx": "^3.12.6"
   },
   "scripts": {
-    "dev": "tsx src/main.ts",
+    "dev": "nodemon --exec tsx src/main.ts",
     "test": "ts-node src/middlewares/routerMiddleware",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },

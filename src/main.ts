@@ -11,7 +11,7 @@ const app = new Koa()
 
 app.use(async (ctx: Koa.Context, next: Koa.Next) => {
   ctx.state.setting = setting
-  console.log(ctx.request.query)
+  console.log(ctx)
   await next()
 })
 

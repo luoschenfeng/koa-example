@@ -44,7 +44,7 @@ export const returnMassage: controller = async (ctx) => {
     const [ choice ] = await createCompletion(Content)
 
     if (choice) {
-      Content = choice.text.replace(/^\s/, '')
+      Content = `<![CDATA[${choice.text.replace(/^\s/, '')}]]`
     }
   } else {
     Content = reqMessageInfo.content
@@ -58,7 +58,7 @@ export const returnMassage: controller = async (ctx) => {
       value: (+new Date().setMilliseconds(0) / 1000).toFixed(),
     },
     MsgType: reqMessageInfo.msgtype,
-    Content: Content,
+    Content,
   }
 
 

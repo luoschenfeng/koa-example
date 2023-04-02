@@ -1,0 +1,21 @@
+import {
+  Configuration, OpenAIApi,
+} from 'openai';
+import  {
+  OPENAI_API_KEY, ORGANIZATION_ID,
+} from '@/const'
+const configuration = new Configuration({
+  apiKey: OPENAI_API_KEY,
+  organization: ORGANIZATION_ID,
+});
+
+const openai = new OpenAIApi(configuration);
+
+export function createCompletion(prompt) {
+  return openai.createCompletion({
+    model: 'gpt-3.5-turbo',
+    prompt,
+    temperature: 0,
+    max_tokens: 7,
+  });
+}

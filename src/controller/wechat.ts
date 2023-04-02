@@ -8,8 +8,9 @@ import {
   createHash,
 } from 'crypto'
 import {
-  xmlToObject, objectToXml,
+  xmlToObject, objectToXml, createCompletion,
 } from '@/utils'
+
 export const testServer: controller = (ctx) => {
   const {
     signature, timestamp, nonce, echostr,
@@ -34,8 +35,16 @@ export const testServer: controller = (ctx) => {
   }
 }
 
-export const returnMassage: controller = (ctx) => {
+export const returnMassage: controller = async (ctx) => {
   const reqMessageInfo = xmlToObject(ctx.request.body as string) as any
+
+  let Content = /<!\[CDATA\[(.*)?\]\]>/.exec('<![CDATA[1]]>')[1]
+
+  if (Content) {
+    Content = await createCompletion(Content) as any
+  } else {
+    Content = reqMessageInfo.content
+  }
 
   const massageInfo = {
     ToUserName: reqMessageInfo.fromusername,
@@ -45,8 +54,9 @@ export const returnMassage: controller = (ctx) => {
       value: (+new Date().setMilliseconds(0) / 1000).toFixed(),
     },
     MsgType: reqMessageInfo.msgtype,
-    Content: reqMessageInfo.content,
+    Content: Content,
   }
+
 
   return objectToXml(massageInfo)
 }

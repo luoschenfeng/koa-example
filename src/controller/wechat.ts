@@ -44,7 +44,7 @@ export const returnMassage: controller = async (ctx) => {
   }
 
   if (Content.value) {
-    const [ choice ] = await createCompletion(Content)
+    const [ choice ] = await createCompletion(Content.value)
 
     if (choice) {
       Content = {

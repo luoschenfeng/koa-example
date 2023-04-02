@@ -11,9 +11,9 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
-export function createCompletion(prompt) {
+export async function createCompletion(prompt) {
   return openai.createCompletion({
-    model: 'gpt-3.5-turbo',
+    model: 'text-davinci-003',
     prompt,
     temperature: 0,
     max_tokens: 7,

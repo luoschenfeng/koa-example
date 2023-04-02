@@ -9,8 +9,8 @@
       "cwd": "${workspaceFolder}",
       "address": "139.28.235.182",
       "port": 9229,
-      "localRoot": "${workspaceFolder}", // 本地程序所在的目录
-      "remoteRoot": "/home/guohuan/opt/koa-mvc", // 服务器对应程序所在的目录
+      // "localRoot": "${workspaceFolder}", // 本地程序所在的目录
+      // "remoteRoot": "/home/guohuan/opt/koa-mvc", // 服务器对应程序所在的目录
       "type": "node"
     },
     {

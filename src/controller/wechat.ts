@@ -44,7 +44,7 @@ export const returnMassage: controller = async (ctx) => {
     const [ choice ] = await createCompletion(Content)
 
     if (choice) {
-      Content = choice?.[0].text.replace(/^\s/, '')
+      Content = choice.text.replace(/^\s/, '')
     }
   } else {
     Content = reqMessageInfo.content

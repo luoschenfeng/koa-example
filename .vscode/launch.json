@@ -1,17 +1,30 @@
 {
   "configurations": [
-  {
-    "name": "remote attach via pnpm",
-    "request": "attach",
-    "skipFiles": [
-      "<node_internals>/**"
-    ],
-    "cwd": "${workspaceFolder}",
-    "address": "139.28.235.182",
-    "port": 9229,
-    "localRoot": "${workspaceFolder}", // 本地程序所在的目录
-    "remoteRoot": "/home/guohuan/opt/koa-mvc", // 服务器对应程序所在的目录
-    "type": "node"
-  }
+    {
+      "name": "remote attach via pnpm",
+      "request": "attach",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "cwd": "${workspaceFolder}",
+      "address": "139.28.235.182",
+      "port": 9229,
+      "localRoot": "${workspaceFolder}", // 本地程序所在的目录
+      "remoteRoot": "/home/guohuan/opt/koa-mvc", // 服务器对应程序所在的目录
+      "type": "node"
+    },
+    {
+      "name": "Launch via pnpm",
+      "request": "launch",
+      "runtimeArgs": [
+        "dev",
+      ],
+      "runtimeExecutable": "/home/luoschenfeng/.nvm/versions/node/v16.14.2/bin/pnpm",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "cwd": "${workspaceFolder}",
+      "type": "node"
+    }
   ]
 }

@@ -1,15 +1,15 @@
 import Router, {
   route,
 } from '@/core/Router'
-import {
-  testServer, returnMassage,
-} from '@/controller/index'
+import weChat from './weChat'
 import user from './user'
 import menu from './menu'
 
 const routes: route[] = [
-  Router.get('/^$/', testServer),
-  Router.post('/^$/', returnMassage),
+  new Router({
+    pattern: '/^$/',
+    children: weChat,
+  }),
   Router.get('api/user', user),
   new Router({
     pattern: 'api/routes',

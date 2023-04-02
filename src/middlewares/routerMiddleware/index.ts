@@ -43,6 +43,9 @@ export default async function (ctx:Koa.Context, next:Koa.Next) {
   async function select(routes: route[]) {
 
     for (const route of routes) {
+      if (route.method !== 'ALL' && !route.method.includes(method)) {
+        continue
+      }
 
       const spliterCount = deleteSpliter(route.pattern).split('/').length
 
@@ -63,12 +66,12 @@ export default async function (ctx:Koa.Context, next:Koa.Next) {
         }
         continue
       }
-      if (!(route.method == 'ALL' || route.method.includes(method))) {
-        ctx.body = responseJsonError({
-          code: '405000',
-        })
-        break
-      }
+      // if (!(route.method == 'ALL' || route.method.includes(method))) {
+      //   ctx.body = responseJsonError({
+      //     code: '405000',
+      //   })
+      //   // break
+      // }
 
       // has a param
       matchedResult.result && (params = Object.assign(params, matchedResult.result))

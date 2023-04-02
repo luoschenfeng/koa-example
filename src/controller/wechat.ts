@@ -41,7 +41,15 @@ export const returnMassage: controller = async (ctx) => {
   let Content = /\[CDATA\[(.*)?\]\]/.exec(reqMessageInfo.content.value)[1]
 
   if (Content) {
-    Content = await createCompletion(Content) as any
+    const {
+      data: {
+        choices,
+      },
+    } = await createCompletion(Content)
+
+    if (choices) {
+      Content = choices?.[0].text.replace(/^\s/, '')
+    }
   } else {
     Content = reqMessageInfo.content
   }

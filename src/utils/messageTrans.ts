@@ -10,7 +10,7 @@ export function objectToXml(object) {
       type, value,
     } = object[key]
 
-    const tagName = key.slice(0, 1).toUpperCase() + key.slice(1)
+    const tagName = key
 
     xml += `<${tagName}>${type === 'text' ? value : `<!${value}>`}</${tagName}>`
   })

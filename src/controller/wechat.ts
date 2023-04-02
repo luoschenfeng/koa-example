@@ -38,14 +38,14 @@ export const returnMassage: controller = (ctx) => {
   const reqMessageInfo = xmlToObject(ctx.request.body as string) as any
 
   const massageInfo = {
-    tousername: reqMessageInfo.fromusername,
-    fromusername: reqMessageInfo.tousername,
-    createtime: {
+    ToUserName: reqMessageInfo.fromusername,
+    FromUserName: reqMessageInfo.tousername,
+    CreateTime: {
       type: 'text',
       value: (+new Date().setMilliseconds(0) / 1000).toFixed(),
     },
-    msgtype: reqMessageInfo.msgtype,
-    content: reqMessageInfo.content,
+    MsgType: reqMessageInfo.msgtype,
+    Content: reqMessageInfo.content,
   }
 
   return objectToXml(massageInfo)

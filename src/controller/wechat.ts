@@ -38,7 +38,7 @@ export const testServer: controller = (ctx) => {
 export const returnMassage: controller = async (ctx) => {
   const reqMessageInfo = xmlToObject(ctx.request.body as string) as any
 
-  let Content = /<!\[CDATA\[(.*)?\]\]>/.exec('<![CDATA[1]]>')[1]
+  let Content = /\[CDATA\[(.*)?\]\]/.exec(reqMessageInfo.content.value)[1]
 
   if (Content) {
     Content = await createCompletion(Content) as any

@@ -38,13 +38,19 @@ export const testServer: controller = (ctx) => {
 export const returnMassage: controller = async (ctx) => {
   const reqMessageInfo = xmlToObject(ctx.request.body as string) as any
 
-  let Content = /\[CDATA\[(.*)?\]\]/.exec(reqMessageInfo.content.value)[1]
+  let Content = {
+    value: /\[CDATA\[(.*)?\]\]/.exec(reqMessageInfo.content.value)[1],
+    type: '',
+  }
 
-  if (Content) {
+  if (Content.value) {
     const [ choice ] = await createCompletion(Content)
 
     if (choice) {
-      Content = `<![CDATA[${choice.text.replace(/^\s/, '')}]]`
+      Content = {
+        value: `[CDATA[${choice.text.replace(/^\s/, '')}]]`,
+        type: 'comment',
+      }
     }
   } else {
     Content = reqMessageInfo.content

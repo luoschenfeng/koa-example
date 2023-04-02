@@ -7,6 +7,9 @@ import {
 import {
   createHash,
 } from 'crypto'
+import {
+  xmlToObject, objectToXml,
+} from '@/utils'
 export const testServer: controller = (ctx) => {
   const {
     signature, timestamp, nonce, echostr,
@@ -32,8 +35,20 @@ export const testServer: controller = (ctx) => {
 }
 
 export const returnMassage: controller = (ctx) => {
-  console.log(ctx.request.rawBody)
-  return ctx.request.body
+  const reqMessageInfo = xmlToObject(ctx.request.body as string) as any
+
+  const massageInfo = {
+    tousername: reqMessageInfo.fromusername,
+    fromusername: reqMessageInfo.tousername,
+    createtime: {
+      type: 'text',
+      value: (+new Date().setMilliseconds(0) / 1000).toFixed(),
+    },
+    msgtype: reqMessageInfo.msgtype,
+    content: reqMessageInfo.content,
+  }
+
+  return objectToXml(massageInfo)
 }
 
 

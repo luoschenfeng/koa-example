@@ -3,5 +3,5 @@ export interface dynamicImport<T> {
 }
 
 export type likeObject = {
-  [key: string]: any
+  [key: string]: likeObject | string
 }

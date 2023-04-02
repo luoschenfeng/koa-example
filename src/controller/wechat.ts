@@ -32,7 +32,7 @@ export const testServer: controller = (ctx) => {
 }
 
 export const returnMassage: controller = (ctx) => {
-  console.log(ctx.request.body)
+  console.log(ctx.request.rawBody)
   return ctx.request.body
 }
 

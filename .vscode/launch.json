@@ -1,17 +1,13 @@
 {
   "configurations": [
     {
-      "name": "remote attach via pnpm",
       "request": "attach",
-      "skipFiles": [
-        "<node_internals>/**"
-      ],
-      "cwd": "${workspaceFolder}",
+      "type": "node",
+      "name": "remote attach",
       "address": "139.28.235.182",
       "port": 9229,
-      // "localRoot": "${workspaceFolder}", // 本地程序所在的目录
-      // "remoteRoot": "/home/guohuan/opt/koa-mvc", // 服务器对应程序所在的目录
-      "type": "node"
+      "localRoot": "${workspaceFolder}", // 本地程序所在的目录
+      "remoteRoot": "/home/guohuan/opt/koa-mvc", // 服务器对应程序所在的目录
     },
     {
       "name": "Launch via tsx",

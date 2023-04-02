@@ -8,7 +8,14 @@ import routerMiddleware from '@/middlewares/routerMiddleware'
 
 const app = new Koa()
 
-app.use(bodyParser());
+app.use(bodyParser({
+  enableTypes: [
+    'json',
+    'form',
+    'text',
+    'xml',
+  ],
+}));
 app.use(async (ctx: Koa.Context, next: Koa.Next) => {
   ctx.state.setting = setting
   await next()

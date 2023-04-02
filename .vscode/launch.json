@@ -14,12 +14,14 @@
       "type": "node"
     },
     {
-      "name": "Launch via pnpm",
+      "name": "Launch via tsx",
       "request": "launch",
       "runtimeArgs": [
-        "dev",
+        "watch",
+        "src/main.ts"
       ],
-      "runtimeExecutable": "/home/luoschenfeng/.nvm/versions/node/v16.14.2/bin/pnpm",
+      "runtimeExecutable": "${workspaceFolder}/node_modules/tsx/dist/cli.js",
+      "restart": true,
       "skipFiles": [
         "<node_internals>/**"
       ],
